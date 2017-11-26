@@ -203,7 +203,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 				player2.setVisibility(View.VISIBLE);
 				ivAnimation.setVisibility(View.VISIBLE);
 				player2.setPerson(oppoPerson);
-				resultEnum res = response.getCode() == 1 ? resultEnum.Win : resultEnum.Lose;
+				resultEnum res = response.getCode() == 2 ? resultEnum.Win : resultEnum.Lose;
 				res = response.getCode() == 5 ? resultEnum.Tied : res;
 				tvHint.setText("");
 
@@ -386,8 +386,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 			client.send(JSON.toJSONString(gameRequest));
 		}
 
-		if(client != null && client.isConnecting()){
+		if(client != null && client.isOpen()){
 			client.close();
+			Log.d("连接已关闭", "连接已关闭");
+		}else {
+			Log.d("连接已关闭", "。。。");
 		}
 	}
 
