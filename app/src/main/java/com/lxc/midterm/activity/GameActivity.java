@@ -417,6 +417,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 		if(client != null && client.isOpen()){
 			client.close();
+			Log.d("连接已关闭", "连接已关闭");
+		}else {
+			Log.d("连接已关闭", "。。。");
 		}
 	}
 

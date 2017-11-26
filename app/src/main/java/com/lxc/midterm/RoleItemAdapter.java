@@ -83,6 +83,7 @@ public class RoleItemAdapter extends RecyclerView.Adapter<RoleItemAdapter.ViewHo
         Person item = mItemsList.get(position);
         String head_url = item.getHead_url();
         if(head_url != null){
+            Glide.with(context).clear(holder.roleHead);
             Glide.with(context).load(item.getHead_url()).into(holder.roleHead);
         }else {
             Glide.with(context).load(R.drawable.origin_head).into(holder.roleHead);
