@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lxc.midterm.R;
 import com.lxc.midterm.RoleItemAdapter;
 import com.lxc.midterm.domain.Person;
@@ -199,6 +200,17 @@ public class MainActivity extends AppCompatActivity {
 				initItems();
 				adapter.notifyDataSetChanged();
 			} else if (data.getBooleanExtra("isEdit", false)) {
+				//清除内存缓存
+				Glide.get(MainActivity.this).clearMemory();
+				new Thread(){
+					@Override
+					public void run() {
+						//清除子线程磁盘缓存
+						Glide.get(MainActivity.this).clearDiskCache();
+						super.run();
+					}
+				}.start();
+
 				Person p =(Person) data.getSerializableExtra("person");
 				mPersons.set(requestCode, p);
 				adapter.notifyDataSetChanged();
